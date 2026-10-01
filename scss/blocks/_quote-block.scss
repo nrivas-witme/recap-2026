@@ -1,0 +1,37 @@
+@use "../variables" as *;
+
+.quote-block {
+  margin: 4rem 0;
+  padding: 2.5rem 0;
+  border-top: 1px solid rgba(228, 200, 138, 0.3);
+  border-bottom: 1px solid rgba(228, 200, 138, 0.3);
+
+  &__text {
+    margin: 0;
+    font-family: $font-display;
+    font-size: clamp(2rem, 5vw, 3.75rem);
+    font-style: italic;
+    line-height: 1.12;
+  }
+
+  &__huge {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: clamp(3.5rem, 13vw, 11rem);
+    font-style: normal;
+    line-height: 0.9;
+    color: rgba($color-plum, 0.9);
+    font-variant-numeric: tabular-nums;
+
+    .chapter--dark &,
+    .chapter--accent & {
+      color: $color-gold;
+    }
+  }
+
+  &__note {
+    margin: 1.25rem 0 0;
+    font-size: 0.9rem;
+    opacity: 0.65;
+  }
+}

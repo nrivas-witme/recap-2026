@@ -1,0 +1,31 @@
+@use "../variables" as *;
+
+body {
+  font-family: $font-body;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: $color-text-dark;
+  background: $color-bg-light;
+}
+
+h1,
+h2,
+h3,
+.display-title {
+  font-family: $font-display;
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.text-muted {
+  color: $color-text-muted;
+}
+
+.text-gold {
+  color: $color-gold;
+}
+
+[id] {
+  scroll-margin-top: calc(#{$header-height} + 1rem);
+}

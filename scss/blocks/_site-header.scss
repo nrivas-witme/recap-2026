@@ -1,0 +1,75 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: $header-height;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.25rem;
+  mix-blend-mode: difference;
+  color: $color-text-light;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s $ease-out-expo;
+
+  body.is-ready & {
+    opacity: 1;
+  }
+
+  &__logo {
+    pointer-events: auto;
+    font-family: $font-display;
+    font-size: 1.25rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    pointer-events: auto;
+  }
+
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 1.5rem;
+    cursor: pointer;
+
+    span {
+      display: block;
+      height: 1px;
+      background: currentColor;
+      transition: transform 0.3s;
+    }
+  }
+
+  &__chapter {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-align: center;
+    max-width: 14rem;
+    line-height: 1.3;
+  }
+
+  &__chapter-num,
+  &__chapter-title {
+    display: inline;
+  }
+
+  &__year {
+    pointer-events: auto;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+  }
+}

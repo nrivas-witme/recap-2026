@@ -1,0 +1,183 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.toast {
+  --g: 0;
+
+  position: relative;
+  z-index: 1;
+  height: 320vh;
+  background: $color-bg-dark;
+  color: $color-text-light;
+
+  &__sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $header-height 1.25rem 2rem;
+    text-align: center;
+  }
+
+  &__glow {
+    position: absolute;
+    width: 80vmin;
+    height: 80vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(228, 200, 138, 0.2), transparent 65%);
+    opacity: var(--g);
+    transform: scale(calc(0.5 + var(--g) * 0.8));
+  }
+
+  &__glasses {
+    --glass-h: clamp(6rem, 17vh, 9.5rem);
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: calc(var(--glass-h) * 0.32);
+    margin-bottom: 2.5rem;
+    color: $color-gold;
+  }
+
+  &__glass {
+    width: auto;
+    height: var(--glass-h);
+    transform-origin: bottom center;
+
+    &--left {
+      transform: translateX(calc((1 - var(--g)) * -26vw)) rotate(calc(var(--g) * 14deg));
+    }
+
+    &--right {
+      transform: translateX(calc((1 - var(--g)) * 26vw)) rotate(calc(var(--g) * -14deg)) scaleX(-1);
+    }
+  }
+
+  &__spark {
+    position: absolute;
+    top: -1.25rem;
+    left: 50%;
+    font-size: 2rem;
+    color: $color-champagne;
+    opacity: 0;
+    transform: translateX(-50%) scale(0);
+    transition:
+      opacity 0.3s,
+      transform 0.6s $ease-out-expo;
+
+    .is-clinked & {
+      opacity: 1;
+      transform: translateX(-50%) scale(1) rotate(45deg);
+    }
+  }
+
+  &__quote {
+    position: relative;
+    max-width: 18ch;
+    margin: 0 auto;
+    font-family: $font-display;
+    font-size: clamp(2rem, 5.5vw, 4.5rem);
+    line-height: 1.1;
+
+    .word {
+      opacity: 0.15;
+      transition: opacity 0.4s, color 0.4s;
+
+      &.is-lit {
+        opacity: 1;
+        color: $color-champagne;
+      }
+    }
+  }
+
+  &__cta {
+    position: relative;
+    margin: 2rem 0 0;
+    font-family: $font-display;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-style: italic;
+    line-height: 1;
+    color: $color-gold;
+    opacity: 0;
+    transform: translateY(2rem) scale(0.9);
+    transition:
+      opacity 0.8s $ease-out-expo,
+      transform 1s $ease-out-expo;
+
+    .is-cheers & {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+.toast-after {
+  position: relative;
+  z-index: 1;
+  padding: 2rem 1.25rem 6rem;
+  background: $color-bg-dark;
+  color: $color-text-light;
+  text-align: center;
+
+  &__list {
+    display: grid;
+    gap: 1.25rem;
+    max-width: 40rem;
+    margin: 0 auto 4rem;
+    padding: 0;
+    list-style: none;
+    font-family: $font-display;
+    font-size: clamp(1.2rem, 2.8vw, 1.75rem);
+    font-style: italic;
+    line-height: 1.35;
+
+    li::before {
+      content: "🥂 ";
+      font-style: normal;
+    }
+  }
+
+  &__thanks {
+    max-width: 34rem;
+    margin: 0 auto;
+    font-size: 1rem;
+    line-height: 1.7;
+    opacity: 0.75;
+  }
+
+  &__photo {
+    max-width: 62rem;
+    margin: 3rem auto 0;
+
+    img {
+      display: block;
+      width: 100%;
+      border: 1px solid rgba(228, 200, 138, 0.25);
+      border-radius: 1.25rem;
+      box-shadow: 0 28px 50px -28px rgba(0, 0, 0, 0.7);
+    }
+
+    figcaption {
+      max-width: 44rem;
+      margin: 1rem auto 0;
+      font-family: $font-display;
+      font-size: clamp(1.15rem, 2.35vw, 1.55rem);
+      font-style: italic;
+      line-height: 1.45;
+      color: $color-champagne;
+    }
+  }
+
+  &__credits {
+    margin: 4rem 0 0;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.4;
+  }
+}

@@ -1,0 +1,14 @@
+@use "../variables" as *;
+
+.scroll-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 150;
+  height: 2px;
+  background: linear-gradient(90deg, $color-gold-deep, $color-gold, $color-champagne);
+  transform-origin: left center;
+  transform: scaleX(var(--page-p, 0));
+  pointer-events: none;
+}

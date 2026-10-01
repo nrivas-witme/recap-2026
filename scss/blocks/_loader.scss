@@ -1,0 +1,66 @@
+@use "../variables" as *;
+
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $color-bg-dark;
+  transition: opacity 0.8s $ease-out-expo, visibility 0.8s;
+
+  &.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  &__group {
+    text-align: center;
+  }
+
+  &__story {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    color: $color-text-light;
+    font-family: $font-display;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  &__diamond {
+    width: 0.45rem;
+    height: 0.45rem;
+    background: $color-gold;
+    transform: rotate(45deg);
+  }
+
+  &__counter {
+    font-family: $font-display;
+    font-size: clamp(4rem, 15vw, 9rem);
+    line-height: 1;
+    color: $color-text-light;
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__label {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: $color-text-muted;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+}
+
+body.is-loading {
+  overflow: hidden;
+}

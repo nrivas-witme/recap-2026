@@ -1,0 +1,77 @@
+@use "../variables" as *;
+
+.pin-zoom {
+  --show: clamp(0, calc((var(--p, 0) - 0.45) * 3), 1);
+
+  position: relative;
+  z-index: 1;
+  height: 240vh;
+  background: $color-bg-dark;
+  color: $color-text-light;
+
+  &__sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.25rem;
+    text-align: center;
+  }
+
+  &__halo {
+    position: absolute;
+    width: 60vmin;
+    height: 60vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(228, 200, 138, 0.28), transparent 65%);
+    transform: scale(calc(0.3 + var(--p, 0) * 2.4));
+  }
+
+  &__eyebrow {
+    position: relative;
+    margin: 0 0 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: $color-gold;
+  }
+
+  &__value {
+    position: relative;
+    margin: 0;
+    font-family: $font-display;
+    font-size: clamp(3rem, 13vw, 12rem);
+    line-height: 1;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    transform: scale(calc(0.45 + var(--p, 0) * 0.6));
+  }
+
+  &__badge {
+    position: relative;
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid $color-gold;
+    border-radius: 99px;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    color: $color-gold;
+    opacity: var(--show);
+  }
+
+  &__note {
+    position: relative;
+    max-width: 30rem;
+    margin: 1.5rem auto 0;
+    font-family: $font-display;
+    font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+    font-style: italic;
+    opacity: var(--show);
+    transform: translateY(calc((1 - var(--show)) * 2rem));
+  }
+}

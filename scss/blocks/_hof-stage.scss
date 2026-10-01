@@ -1,0 +1,189 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+$curtain-fold: repeating-linear-gradient(
+  90deg,
+  #4f0613 0,
+  #8e1630 1.4rem,
+  #b01f3d 2rem,
+  #8e1630 2.6rem,
+  #4f0613 4rem
+);
+$curtain-shade: linear-gradient(to bottom, rgba(0, 0, 0, 0.35), transparent 25%, transparent 70%, rgba(0, 0, 0, 0.5));
+$stage-pinned: "(min-width: #{$bp-desktop}) and (min-height: 700px)";
+
+.chapter--hof {
+  background: #050508;
+  color: $color-text-light;
+}
+
+.hof-stage {
+  --open: 0;
+
+  position: relative;
+
+  @media #{$stage-pinned} {
+    height: 260vh;
+  }
+
+  &__sticky {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(#{$header-height} + 3rem) 9% 4rem;
+
+    @media #{$stage-pinned} {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding-bottom: 2rem;
+    }
+  }
+
+  &__veil {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 40%, #1c1022 0%, #050508 72%);
+  }
+
+  &__floor {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 30%;
+    background: radial-gradient(ellipse 60% 70% at 50% 100%, rgba(228, 200, 138, 0.14), transparent 70%);
+    opacity: var(--open);
+  }
+
+  &__spotlights {
+    position: absolute;
+    inset: 0;
+    opacity: calc(0.08 + var(--open) * 0.92);
+    pointer-events: none;
+  }
+
+  &__spotlight {
+    position: absolute;
+    top: -10%;
+    left: 10%;
+    width: 36%;
+    height: 110%;
+    background: conic-gradient(
+      from 180deg at 50% 0%,
+      transparent 160deg,
+      rgba(255, 244, 214, 0.22) 172deg,
+      rgba(255, 250, 235, 0.35) 180deg,
+      rgba(255, 244, 214, 0.22) 188deg,
+      transparent 200deg
+    );
+    mix-blend-mode: screen;
+    transform-origin: 50% 0;
+    animation: hof-spot-sway 7s ease-in-out infinite;
+
+    &:nth-child(2) {
+      left: 32%;
+      animation-delay: -2.3s;
+    }
+
+    &:nth-child(3) {
+      left: 54%;
+      animation-delay: -4.6s;
+    }
+  }
+
+  &__valance {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 7;
+    height: 8vh;
+    background: $curtain-shade, $curtain-fold;
+    border-bottom: 3px solid $color-gold;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      right: 0;
+      left: 0;
+      height: 1.5rem;
+      background: radial-gradient(circle at 50% 0, #8e1630 68%, transparent 70%) 0 0 / 3rem 1.5rem repeat-x;
+    }
+  }
+
+  &__curtain {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 6;
+    width: 51%;
+    background: $curtain-shade, $curtain-fold;
+    box-shadow: inset 0 0 90px rgba(0, 0, 0, 0.6);
+
+    &--left {
+      left: 0;
+      transform-origin: left center;
+      transform: scaleX(calc(1 - var(--open) * 0.84));
+    }
+
+    &--right {
+      right: 0;
+      transform-origin: right center;
+      transform: scaleX(calc(1 - var(--open) * 0.84));
+    }
+  }
+
+  &__confetti {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+
+    span {
+      position: absolute;
+      top: -5%;
+      left: var(--x);
+      width: 0.45rem;
+      height: 0.9rem;
+      background: var(--c);
+      opacity: 0;
+    }
+  }
+
+  &.is-revealed &__confetti span {
+    animation: hof-confetti var(--d) ease-in var(--delay) forwards;
+  }
+
+  .hall-of-fame {
+    position: relative;
+    z-index: 4;
+    opacity: clamp(0, calc((var(--open) - 0.35) * 2), 1);
+    transform: translateY(calc((1 - var(--open)) * 3rem)) scale(calc(0.92 + var(--open) * 0.08));
+  }
+}
+
+@keyframes hof-spot-sway {
+  0%,
+  100% {
+    transform: rotate(-9deg);
+  }
+  50% {
+    transform: rotate(9deg);
+  }
+}
+
+@keyframes hof-confetti {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+  100% {
+    opacity: 0.2;
+    transform: translateY(110vh) rotate(calc(var(--spin) * 720deg));
+  }
+}

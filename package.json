@@ -1,0 +1,11 @@
+{
+  "name": "witme-recap-2026",
+  "private": true,
+  "scripts": {
+    "sass": "sass scss/main.scss styles/main.css --watch",
+    "sass:build": "sass scss/main.scss styles/main.css --style=compressed"
+  },
+  "devDependencies": {
+    "sass": "^1.83.0"
+  }
+}

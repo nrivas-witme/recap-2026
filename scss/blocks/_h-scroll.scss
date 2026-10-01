@@ -1,0 +1,111 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.h-scroll {
+  position: relative;
+
+  @media (max-width: 767px) {
+    height: auto !important;
+  }
+
+  &__sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 767px) {
+      position: relative;
+      top: auto;
+      height: auto;
+      overflow: visible;
+      display: block;
+      padding: calc(#{$header-height} + 2rem) 1.25rem 0;
+    }
+  }
+
+  &__track {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    width: max-content;
+    padding: 0 1.25rem;
+    transform: translate3d(calc(var(--p, 0) * var(--h-dist, 0px) * -1), 0, 0);
+    will-change: transform;
+
+    @include respond(desktop) {
+      gap: 2rem;
+      padding: 0 2rem;
+    }
+
+    @media (max-width: 767px) {
+      display: grid;
+      width: auto;
+      gap: 1rem;
+      padding: 0;
+      transform: none !important;
+    }
+  }
+
+  &__hint {
+    position: absolute;
+    top: calc(#{$header-height} + 1.5rem);
+    left: 1.25rem;
+    margin: 0;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.55;
+
+    @include respond(desktop) {
+      left: 2rem;
+    }
+
+    @media (max-width: 767px) {
+      position: static;
+      margin: 0 0 1.25rem;
+    }
+  }
+
+  &__progress {
+    position: absolute;
+    right: 1.25rem;
+    bottom: 2.5rem;
+    left: 1.25rem;
+    height: 1px;
+    background: rgba(248, 244, 236, 0.12);
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: $color-gold;
+      transform-origin: left center;
+      transform: scaleX(var(--p, 0));
+    }
+
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+
+  .event-card {
+    flex-shrink: 0;
+    width: clamp(15rem, 26vw, 22rem);
+
+    &:nth-child(odd) {
+      margin-top: -8vh;
+    }
+
+    &:nth-child(even) {
+      margin-top: 8vh;
+    }
+
+    @media (max-width: 767px) {
+      width: 100%;
+      margin-top: 0 !important;
+    }
+  }
+}

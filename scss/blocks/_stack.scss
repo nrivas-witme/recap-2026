@@ -1,0 +1,57 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.stack {
+  display: grid;
+  gap: 2rem;
+  margin: 3rem 0 0;
+  padding: 0 0 12vh;
+  list-style: none;
+
+  &__card {
+    position: sticky;
+    top: calc(#{$header-height} + 1rem + var(--i, 0) * 1.5rem);
+    display: grid;
+    gap: 1rem;
+    min-height: 16rem;
+    padding: 2rem;
+    border: 1px solid rgba(18, 20, 26, 0.08);
+    background: #fff;
+    box-shadow: 0 30px 60px -30px rgba(18, 20, 26, 0.35);
+
+    @include respond(tablet) {
+      grid-template-columns: auto 1fr;
+      gap: 2.5rem;
+      padding: 2.75rem 3rem;
+    }
+  }
+
+  &__num {
+    font-family: $font-display;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    line-height: 0.8;
+    color: rgba($color-plum, 0.88);
+  }
+
+  &__name {
+    margin: 0 0 0.75rem;
+    font-family: $font-display;
+    font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+  }
+
+  &__text {
+    margin: 0;
+    max-width: 38rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  &__tag {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba($color-plum, 0.8);
+  }
+}

@@ -1,0 +1,54 @@
+@use "../variables" as *;
+
+.marquee {
+  position: relative;
+  z-index: 3;
+  overflow: hidden;
+  padding: 1.25rem 0;
+  background: $color-gold;
+  color: $color-bg-dark;
+
+  &--dark {
+    background: $color-bg-dark;
+    color: $color-gold;
+    border-block: 1px solid $color-gold-dim;
+  }
+
+  &--tilt {
+    width: calc(100% + 4rem);
+    margin: -0.2rem -2rem 0.75rem;
+    padding: 1.5rem 2rem;
+    transform: rotate(-1.2deg) scale(1.03);
+  }
+
+  &__track {
+    display: flex;
+    width: max-content;
+    transform: translate3d(calc(var(--p, 0) * -35%), 0, 0);
+    will-change: transform;
+  }
+
+  &--reverse &__track {
+    transform: translate3d(calc(-35% + var(--p, 0) * 35%), 0, 0);
+  }
+
+  &__group {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  &__item {
+    padding: 0 1.25rem;
+    font-family: $font-display;
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-style: italic;
+    white-space: nowrap;
+
+    &::after {
+      content: "✦";
+      margin-left: 2.5rem;
+      font-style: normal;
+      opacity: 0.6;
+    }
+  }
+}
